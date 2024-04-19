@@ -8,21 +8,20 @@ import os
 
 
 def RemoveDir(filepath):
-    '''
-    如果文件夹不存在就创建，如果文件存在就清空！
-    '''
     if not os.path.exists(filepath):
         os.mkdir(filepath)
     else:
         shutil.rmtree(filepath)
         os.mkdir(filepath)
-
-filePath="C:/Users/li/Desktop/videotoppt/workspace/video/"
+global h,w
+filePath="./workspace/video/"
 for i,j,k in os.walk(filePath):
     print(i,k)
-img = 'C:/Users/li/Desktop/videotoppt/workspace/temp/'
-img2 = 'C:/Users/li/Desktop/videotoppt/workspace/temp2/'
-pptx='C:/Users/li/Desktop/videotoppt/workspace/pptx/'
+h=0
+w=0
+img = './workspace/temp/'
+img2 = './workspace/temp2/'
+pptx='./workspace/pptx/'
 t=time.time()
 for i in range(len(k)):
     a= k[i].replace('.mp4', '')
@@ -34,7 +33,7 @@ for i in range(len(k)):
     converter.main(videopath=filePath+k[i],imgpath=img)
     time.sleep(2)
     print('-------第', i, '次精简---------')
-    compare.main(filePath =img,outputpath=img2)
+    compare.main(filePath1 =img,filePath2=img2)
     time.sleep(2)
     print('-------第', i, '次转换---------')
     jpgtoppt.main(ppt_filename=pptx+a,picPath=img2)

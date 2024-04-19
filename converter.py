@@ -18,6 +18,7 @@ def save_image(image, addr, num):
     address = addr + str(num) + '.jpg'
     cv2.imwrite(address, image)
 def main(videopath,imgpath):
+    global w,h
     videoCapture = cv2.VideoCapture(videopath)
     success, frame = videoCapture.read()
     i = 1000

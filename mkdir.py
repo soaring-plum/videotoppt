@@ -17,5 +17,11 @@ def mkdir(path):
 file = "./workspace/pptx"
 file1= "./workspace/temp"
 file2= "./workspace/temp2"
-file2= "./workspace/video"
+file3= "./workspace/temp3"
+file4= "./workspace/video"
 mkdir(file)
+mkdir(file1)
+mkdir(file2)
+mkdir(file3)
+mkdir(file4)
+
