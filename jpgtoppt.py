@@ -17,7 +17,13 @@ def main(ppt_filename,picPath):
         slide = ppt.slides[i]
         left, top, width, height = pptx.util.Cm(0), pptx.util.Cm(0), pptx.util.Cm(25.4), pptx.util.Cm(19.05)
         slide.shapes.add_picture(image_file=picPath+k[i], left=left, top=top, width=width, height=height)
-    ppt.save(full_filename)
+    a=0
+    while os.path.exists(full_filename):
+        # full_filename = '{}.{}'.format(ppt_filename, 'pptx')
+        full_filename=ppt_filename+str(a).zfill(5)+ 'pptx'
+        a=a+1
+    else:
+        ppt.save(full_filename)
 
 if __name__=='__main__' :
     main(ppt_filename='C:/Users/li/Desktop/videotoppt/workspace/pptx/花卉学new',picPath='C:/Users/li/Desktop/videotoppt/workspace/temp2/')

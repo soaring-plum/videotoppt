@@ -1,4 +1,5 @@
 import shutil
+import subprocess
 import time
 
 import converter
@@ -13,12 +14,22 @@ def RemoveDir(filepath):
     else:
         shutil.rmtree(filepath)
         os.mkdir(filepath)
-global h,w
 filePath="./workspace/video/"
-for i,j,k in os.walk(filePath):
-    print(i,k)
-h=0
-w=0
+files = os.listdir(filePath)
+f=[]
+for file in files:
+    if not os.path.isdir(file):
+        f.append(file)
+s="ffprobe -show_format "
+k=[]
+for i in f:
+    result = subprocess.call(s+filePath+i, shell=True)
+    print(result)
+    if result == 1:
+        print(i+'不是视频文件')
+    elif result == 0:
+        k.append(i)
+        print(i+'视频文件')
 img = './workspace/temp/'
 img2 = './workspace/temp2/'
 pptx='./workspace/pptx/'
@@ -30,7 +41,7 @@ for i in range(len(k)):
     RemoveDir(img)
     RemoveDir(img2)
     print('-------第',i,'次切片---------')
-    converter.main(videopath=filePath+k[i],imgpath=img)
+    converter.main(videopath=filePath+k[i],imgpath=img,r=1)
     time.sleep(2)
     print('-------第', i, '次精简---------')
     compare.main(filePath1 =img,filePath2=img2)
